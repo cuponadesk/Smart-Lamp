@@ -7,30 +7,30 @@
 #include "OpenWeatherMapCurrent.h"
 #include "Point.h"
 
-const uint16_t cloudColors[5][3] = {{ 0x41e8, 0x28c5, 0x1042},
-                                    { 0x41e8, 0x28c5, 0x1042},
-                                    { 0x41e8, 0x28c5, 0x1042},
+const uint16_t cloudColors[5][3] = {{ 0x8410, 0xc618, 0xFFFF},
+                                    { 0x4208, 0x8410, 0xa514},
+                                    { 0x4208, 0x8410, 0xa514},
                                     { 0x41e8, 0x28c5, 0x1042},
                                     { 0x1042, 0x1042, 0x1042}};
 
 const Point cloudStartPositions[25] = { Point(18,3), Point(0,3), Point(24,1), Point(7,2), Point(15,1),
                                    Point(31,1), Point(29,3), Point(11,2), Point(13,4), Point(20,1),
                                     Point(25,4), Point(0,1), Point(8,5), Point(23,4), Point(18,2),
-                                     Point(16,4), Point(4,1), Point(23,2), Point(11,4), Point(12,1),
+                                     Point(16,4), Point(4,1), Point(28,2), Point(11,4), Point(12,1),
                                       Point(4,4), Point(31,3), Point(28,4), Point(8,1), Point(23,1)};
 const uint8_t cloudStartPattern[25] = { 1, 1, 3, 3, 4,
                                    2, 5, 2, 6, 5,
                                     4, 1, 6, 6, 2,
                                      4, 3, 6, 7, 3,
-                                      1, 7, 7, 4, 7};
+                                      4, 7, 7, 4, 7};
 
 const std::vector<std::vector<Point>> cloudPatterns = 
 { 
   { Point(0,0), Point(2,-1), Point(3,-1), Point(1,0), Point(2,0), Point(3,0), Point(-1,1), Point(0,1), Point(1,1), Point(2,1), Point(3,1), Point(4,1) },
-  { Point(0,0), Point(-1,0), Point(-1,0), Point(0,1) },
-  { Point(-1,-1), Point(0,0), Point(1,0), Point(2,0), Point(-1,1), Point(1,0), Point(1,1), Point(1,2) },
-  { Point(0,-1), Point(1,-1), Point(-1,0), Point(0,0), Point(1,0), Point(2,0), Point(0,1), Point(1,2) },
-  { Point(0,-1), Point(1,0), Point(0,0), Point(1,0), Point(0,1), Point(1,1), Point(2,1) },
+  { Point(0,0), Point(-1,0), Point(0,-1), Point(1,0) },
+  { Point(1,-1), Point(0,0), Point(1,0), Point(2,0), Point(-1,1), Point(0,1), Point(1,1), Point(2,1) },
+  { Point(0,-1), Point(1,-1), Point(-1,0), Point(0,0), Point(1,0), Point(2,0), Point(0,1), Point(1,1) },
+  { Point(0,-1), Point(-1,0), Point(0,0), Point(1,0), Point(0,1), Point(1,1), Point(2,1) },
   { Point(-1,-1), Point(0,-1), Point(1,-1), Point(2,-1), Point(-1,0), Point(0,0), Point(1,0), Point(2,0) },
   { Point(-1,-1), Point(0,-1), Point(-1,0), Point(0,0) }
 };
@@ -153,8 +153,8 @@ class Clouds {
   void drawCloud(uint8_t c) { 
 
     for(auto p : cloudPatterns[cloudStartPattern[c]-1]) {
-      Serial.printf("X:%d Y:%d\n", cloudStartPositions[c].x + p.x + _offset, cloudStartPositions[c].y + p.y);
-      _canvas.drawPixel(cloudStartPositions[c].x + p.x + _offset, cloudStartPositions[c].y + p.y, cloudColors[_cloudColorIndex][rand()%3]);
+      Serial.printf("X:%d Y:%d\n", (cloudStartPositions[c].x + p.x + _offset) % 32, cloudStartPositions[c].y + p.y);
+      _canvas.drawPixel((cloudStartPositions[c].x + p.x + _offset) % 32, cloudStartPositions[c].y + p.y, cloudColors[_cloudColorIndex][rand()%3]);
     }
   }
 

@@ -22,7 +22,7 @@ void WeatherGFX::refreshWeatherData() {
   Serial.println("Updating weather _data");
   client.updateCurrent(_data, OPEN_WEATHER_MAP_APP_ID, OPEN_WEATHER_MAP_LOCATION_ID);
 
-  _data->clouds = 100;
+  _data->clouds = 50;
   _data->observationTime = _data->sunrise + 100;
   // _data->weatherId = 203;
 
@@ -83,7 +83,7 @@ void WeatherGFX::refreshWeatherData() {
 void WeatherGFX::updateComponents() {
   Serial.println("Updating components");
 
-  // _sky.setConditions(_data);
+  _sky.setConditions(_data);
   // _lightning.setConditions(_data);
   _clouds.setConditions(_data);
   // _precipitation.setConditions(_data);

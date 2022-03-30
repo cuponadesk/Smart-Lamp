@@ -32,7 +32,7 @@ void Sky::setConditions(OpenWeatherMapCurrentData *data) {
     _skyColor = 0;
   }
   _next = true;
-  Serial.printf("Done setting sky data. Skycolor %d\n", skyColors[_skyColor]);
+  Serial.printf("Done setting sky data. Skycolor %hx\n", skyColors[_skyColor]);
 
 }
 
@@ -44,7 +44,7 @@ GFXcanvas16* Sky::screenBuffer() {
   if(next()) {
     Serial.println("Drawing sky");
     _next = false;
-    _canvas.fillScreen(skyColors[_skyColor]);
+    _canvas.fillScreen(0xF000);
   }
   return &_canvas;
 }
