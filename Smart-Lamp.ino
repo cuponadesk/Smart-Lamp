@@ -41,7 +41,7 @@ Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(WIDTH, HEIGHT, 1, 1, MATRIX_PIN,
 WiFiManager wifiManager;
 
 WeatherGFX weather = WeatherGFX(WIDTH, HEIGHT);
-// TimeGFX tGFX;
+TimeGFX tGFX;
 
 // ESPTouch powerButton(ON_OFF_BUTTON_PIN);
 // ESPTouch middleButton(MIDDLE_BUTTON_PIN);
@@ -58,7 +58,7 @@ void setup() {
   matrix.setTextWrap(false);
   matrix.setBrightness(127);
   matrix.setRemapFunction(&mPos);
-  matrix.show();
+  // tGFX.updateTime();
   
 }
 
@@ -70,7 +70,6 @@ void loop() {
   else if(lampMode == MODE_LAMP) {
     matrix.fillScreen(0xfded);
   }
-  matrix.show();
 
   // if(drawTime) {
   //   if(tGFX.getLayout()) {
@@ -80,7 +79,7 @@ void loop() {
   //     matrix.drawRGBBitmap((hourFormat12(tGFX.getTime())<10?8:7), 9, tGFX.getCanvas(), tGFX.canvasWidth(), tGFX.canvasHeight());
   //   }
   // }
-  // matrix.show();
+  matrix.show();
 }
 
 // void handleButtons() {
