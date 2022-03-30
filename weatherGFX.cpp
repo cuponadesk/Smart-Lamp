@@ -22,7 +22,7 @@ void WeatherGFX::refreshWeatherData() {
   Serial.println("Updating weather _data");
   client.updateCurrent(_data, OPEN_WEATHER_MAP_APP_ID, OPEN_WEATHER_MAP_LOCATION_ID);
 
-  _data->clouds = 9;
+  _data->clouds = 100;
   _data->observationTime = _data->sunrise + 100;
   // _data->weatherId = 203;
 
