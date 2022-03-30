@@ -240,7 +240,7 @@ class Clouds {
   @brief  Draws a single cloud on cloud canvas
   @param  C   Cloud to be drawn
   */
-  void drawCloud(uint8_t c) {
+  void drawCloud(uint8_t c) { 
 
     for(auto p : cloudPatterns[cloudStartPattern[c]-1]) {
       Serial.printf("X:%d Y:%d\n", cloudStartPositions[c].x + p.x + _offset, cloudStartPositions[c].y + p.y);
